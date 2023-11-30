@@ -100,3 +100,47 @@ class BookListPage extends StatelessWidget {
     );
   }
 }
+
+class BookCard extends StatelessWidget {
+  final Book book;
+  final VoidCallback onTap;
+
+  const BookCard({
+    Key? key,
+    required this.book,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      child: Container(
+        width: 100,
+        height: 150,
+        child: ListTile(
+          contentPadding: EdgeInsets.all(16),
+          leading: Container(
+            width: 100,
+            height: 80,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(book.coverImageUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          title: Text(book.bookName),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(book.authorName),
+              Text('Rating: ${book.rating}'),
+            ],
+          ),
+          onTap: onTap,
+        ),
+      ),
+    );
+  }
+}
